@@ -3,7 +3,9 @@ import "./style.scss";
 document.querySelector<HTMLDivElement>("#app")!.onmouseover = (
   event: MouseEvent
 ) => {
-  const letters = event?.target?.innerText?.split("") ?? [];
+  const innerText = (event?.target as unknown as { innerText: string })
+    ?.innerText;
+  const letters = innerText?.split("") ?? [];
   let iteration = 0;
   const fun = 20;
 
@@ -11,19 +13,21 @@ document.querySelector<HTMLDivElement>("#app")!.onmouseover = (
     if (fun + letters.length < iteration) {
       clearInterval(interval);
     }
-
-    event!.target!.innerText = letters
-      .map((letter, index) => {
+    (
+      document.querySelector<HTMLDivElement>("#app") as HTMLDivElement
+    ).innerText = letters
+      .map((letter: string, index: number) => {
         if (" " === letter || fun + index < iteration) {
           return letter;
         }
         return randomLetter();
       })
       .join("");
-      iteration++;
-
+    iteration++;
   }, 30);
 };
 function randomLetter() {
-  return String.fromCharCode("A".charCodeAt() + Math.floor(Math.random() * 26));
+  return String.fromCharCode(
+    "A".charCodeAt(0) + Math.floor(Math.random() * 26)
+  );
 }
