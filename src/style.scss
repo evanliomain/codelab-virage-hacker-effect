@@ -1,11 +1,21 @@
+$dark-color: #343758;
+$light-color: rgba(255, 255, 255, 0.87);
+$accent-color: #e5007d;
+
 :root {
+  --text-color: #{$dark-color};
+  --background-color: #{$light-color};
+
   font-family: "Space Mono", monospace;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  text-shadow:
+    3px 3px 1px $accent-color,
+    6px 6px 1px var(--text-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,19 +36,19 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-size: 60px;
+  font-size: 15ch;
   font-weight: bold;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --text-color: #{$dark-color};
+    --background-color: #{$light-color};
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #{$light-color};
+    --background-color: #{$dark-color};
   }
 }
