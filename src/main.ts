@@ -1,11 +1,9 @@
 import "./style.scss";
 
-document.querySelector<HTMLDivElement>("#app")!.onmouseover = (
-  event: MouseEvent
-) => {
-  const innerText = (event?.target as unknown as { innerText: string })
-    ?.innerText;
-  const letters = innerText?.split("") ?? [];
+const letters =
+  document.querySelector<HTMLDivElement>("#app")?.innerText?.split("") ?? [];
+
+document.querySelector<HTMLDivElement>("#app")!.onmouseover = () => {
   let iteration = 0;
   const fun = 20;
 
